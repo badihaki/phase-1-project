@@ -1,0 +1,57 @@
+p{
+    color: #f65809;
+}
+body{
+    background-image: url('../images/bg.jpg');
+}
+#characterPanel{
+    background-color: blanchedalmond;
+
+    position: absolute sticky;
+    position: -webkit-sticky; /* Safari */
+    
+    margin-top: 5px;
+    margin-bottom: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+    align-items: center;
+    text-align: center;
+}
+#partyPanel{
+    background-color: navajowhite;
+
+    position: absolute;
+    margin: 0 auto;
+
+    top: 60%;
+    margin-left: 15%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+}
+.card{
+    background-image: url('../images/card.png');
+    float: left;
+    position: relative;
+    
+    width: 175px;
+    height: 250px;
+    margin-top: 75px;
+    margin-bottom: 35px;
+    margin-right: 80px;
+    margin-left: 80px;
+
+    align-items: center;
+    text-align: center;
+}
+.card button{
+    font-size: 24px;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    left: 75%;
+}
+.hidden{
+    visibility: hidden;
+}
