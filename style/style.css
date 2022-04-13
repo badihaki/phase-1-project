@@ -31,6 +31,21 @@ body{
     align-items: center;
 }
 .card{
+    background-image: url('../images/card-blank.png');
+    float: left;
+    position: relative;
+    
+    width: 175px;
+    height: 250px;
+    margin-top: 75px;
+    margin-bottom: 35px;
+    margin-right: 80px;
+    margin-left: 80px;
+
+    align-items: center;
+    text-align: center;
+}
+.playerCard{
     background-image: url('../images/card.png');
     float: left;
     position: relative;
