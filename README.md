@@ -57,3 +57,8 @@ The public API data from https://xivapi.com will be my main source. Search reque
         - Presentation
 - Extra research into CSS
 - Study the API documentation and log relevant information
+
+Bugs:
+- The search feature doesn't find the right name
+- 'playerList' returns too many players
+    - perhaps slice isn't the right method?

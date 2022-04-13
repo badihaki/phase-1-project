@@ -24,6 +24,10 @@ function clickOnCard(event){
         searchEvent.preventDefault();
         const nameToSearch = document.querySelector(`#searchName`).value.replaceAll(` `,`&`);
         if(server != `default`){
+            // clear old list data
+            for(const listItem of document.querySelectorAll(`.playerLI`)){
+                listItem.remove();
+            }
             console.log(`name to search: ${nameToSearch} // server to search in: ${server}`);
             // remove the server warning if it exists
             if(document.querySelector(`#noServerWarning`) != null){
@@ -48,7 +52,9 @@ function clickOnCard(event){
                             <img src=${player['Avatar']}>
                             <h3>${player[`Name`]}</h3>
                             `
-
+                            li.addEventListener('click',(listEvent)=>{
+                                // I need to show the player information in #resultsDetails div
+                            })
                             document.querySelector('#searchResults').appendChild(li);
                         }
                         document.querySelector(`#searchButton`).disabled = false;
