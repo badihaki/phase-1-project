@@ -15,21 +15,63 @@
             <!--content-->
             <h1>Party Keeper</h1>
             <h2>a party tool for Final Fantasy XIV</h2>
+            
+            <div>
+                <p>
+                    Click a card to select a party member
+                </p>
+            </div>
+            
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p>
-                Click a card to select a party member
-            </p>
-            <br>
-            <br>
-            <form id="searchForm">
-                <label>Character name</label>
-                <input>
-                <button id="searchButton">Search</button>
-            </form>
+            
+            <div>
+                <div id="searchForm" class="hidden">
+                    <form>
+                        <div>
+                            <label>Character name</label>
+                            <input>
+                        </div>
+                        <div>
+                            <select name="Server">
+                                <option value="null">Select Server</option>
+                                <option value="Behemoth">Behemoth</option>
+                                <option value="Excalibur">Excalibur</option>
+                                <option value="Exodus">Exodus</option>
+                                <option value="Famfrit">Famfrit</option>
+                                <option value="Hyperion">Hyperion</option>
+                                <option value="Lamia">Lamia</option>
+                                <option value="Leviathan">Leviathan</option>
+                                <option value="Ultros">Ultros</option>
+                                <option value="Adamantoise">Adamantoise</option>
+                                <option value="Cactuar">Cactuar</option>
+                                <option value="Faerie">Faerie</option>
+                                <option value="Gilgamesh">Gilgamesh</option>
+                                <option value="Jenova">Jenova</option>
+                                <option value="Midgardsormr">Midgardsormr</option>
+                                <option value="Sargatanas">Sargatanas</option>
+                                <option value="Siren">Siren</option>
+                                <option value="Balmung">Balmung</option>
+                                <option value="Brynhildr">Brynhildr</option>
+                                <option value="Coeurl">Coeurl</option>
+                                <option value="Diabolos">Diabolos</option>
+                                <option value="Goblin">Goblin</option>
+                                <option value="Malboro">Malboro</option>
+                                <option value="Mateus">Mateus</option>
+                                <option value="Zalera">Zalera</option>
+                            </select>
+                            <button id="searchButton">Search</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="searchResults">
+                    <ul>                        
+                    </ul>
+                </div>
+                <div id="resultsDetails">
+                </div>
+            </div>
+
         </div>
 
         <!--
