@@ -30,6 +30,29 @@ function clickOnCard(event){
                 document.querySelector(`#noServerWarning`).remove();
             }
             // build out the functionality with the API
+            fetch(`https://xivapi.com/character/search?name=${nameToSearch}&server=${server}`)
+                .then(resp=>{
+                    document.querySelector(`#searchButton`).disabled = true;
+                    document.querySelector(`#partyPanel`).className = 'hidden';
+                    return resp.json()
+                })
+                    .then(data=>{
+                        // console.log(data['Results']);
+                        const playerList = data['Results'].slice(4);
+                        console.log(playerList);
+                        for (const player of playerList) {
+                            const li = document.createElement(`li`);
+                            li.className = 'playerLI'
+
+                            li.innerHTML = `
+                            <img src=${player['Avatar']}>
+                            <h3>${player[`Name`]}</h3>
+                            `
+
+                            document.querySelector('#searchResults').appendChild(li);
+                        }
+                        document.querySelector(`#searchButton`).disabled = false;
+                    })
         }
         else{
             const serverWarning = document.createElement(`p`);
