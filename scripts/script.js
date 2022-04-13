@@ -46,7 +46,8 @@ function clickOnCard(event){
                         console.log(playerList);
                         for (const player of playerList) {
                             const li = document.createElement(`li`);
-                            li.className = 'playerLI'
+                            li.className = 'playerLI';
+                            li.id = player[`ID`];
 
                             li.innerHTML = `
                             <img src=${player['Avatar']}>
@@ -54,6 +55,21 @@ function clickOnCard(event){
                             `
                             li.addEventListener('click',(listEvent)=>{
                                 // I need to show the player information in #resultsDetails div
+                                fetch(`https://xivapi.com/character/${listEvent.target.parentNode.id}`).then(callForResp=>callForResp.json()).then(playerData=>{
+                                    console.log(playerData);
+                                    /*
+                                    using:
+                                    [`Character`]
+                                        [`Portrait`] - full body
+                                        [`Avatar`] - portrait
+                                        [`Name`][`Title`]
+                                        [`Nameday`]
+                                        [`ActiveClassJob`]
+                                            [`UnlockedState`]
+                                                [`Name`]
+                                            [`Level`]
+                                    */
+                                })
                             })
                             document.querySelector('#searchResults').appendChild(li);
                         }
