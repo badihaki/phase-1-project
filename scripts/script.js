@@ -43,8 +43,11 @@ function clickOnCard(event){
                     .then(data=>{
                         // console.log(data['Results']);
                         const playerList = data['Results'].slice(4);
+                        // debugger;
                         console.log(playerList);
                         for (const player of playerList) {
+                            const {Avatar, Lang, Name, Rank} = player;
+                            //debugger;
                             const li = document.createElement(`li`);
                             li.className = 'playerLI';
                             li.id = player[`ID`];
@@ -57,18 +60,49 @@ function clickOnCard(event){
                                 // I need to show the player information in #resultsDetails div
                                 fetch(`https://xivapi.com/character/${listEvent.target.parentNode.id}`).then(callForResp=>callForResp.json()).then(playerData=>{
                                     console.log(playerData);
+                                    // const {} = playerData;
                                     /*
                                     using:
                                     [`Character`]
                                         [`Portrait`] - full body
                                         [`Avatar`] - portrait
-                                        [`Name`][`Title`]
+                                        [`Name`]
                                         [`Nameday`]
                                         [`ActiveClassJob`]
                                             [`UnlockedState`]
                                                 [`Name`]
                                             [`Level`]
                                     */
+                                   // Extract portrait, name, active job's name, and active job's level
+                                   // use these values to put into #resultsDetails
+                                   const {Name, ActiveClassJob,Portrait} = playerData[`Character`];
+                                   const playerName = document.createElement('h2');
+                                   playerName.innerText = Name;
+                                   const playerPortrait = document.createElement('img');
+                                   playerPortrait.src = Portrait;
+                                   const playerJob = document.createElement('h3');
+                                   playerJob.innerText = ActiveClassJob[`UnlockedState`][`Name`];
+                                   const playerJobLevel = document.createElement(`h4`);
+                                   playerJobLevel.innerText =  ActiveClassJob[`Level`];
+
+                                   const addPlayerBtn = document.createElement(`button`);
+                                   addPlayerBtn.innerText = `+Party`;
+                                   // player button functionality
+                                   // when player presses button, this player is added to the party
+
+                                   const searchResults = document.createElement(`div`);
+                                   searchResults.id = `playerInfo`
+                                   if(document.querySelector('#playerInfo') != null){
+                                       document.querySelector('#playerInfo').remove();
+                                   }
+                                   document.querySelector('#resultsDetails').appendChild(searchResults);
+
+                                   searchResults.appendChild(playerName);
+                                   searchResults.appendChild(playerPortrait);
+                                   searchResults.appendChild(playerJob);
+                                   searchResults.appendChild(playerJobLevel);
+                                   searchResults.appendChild(addPlayerBtn);
+
                                 })
                             })
                             document.querySelector('#searchResults').appendChild(li);
