@@ -14,7 +14,6 @@ function init(event){
 }
 
 function clickOnCard(event){
-    console.log(event.target);
     const card = event.target;
     const searchForm = document.querySelector(`#searchForm`);
     searchForm.classList.remove('hidden')
@@ -103,24 +102,23 @@ function clickOnCard(event){
                                        clearPlayerInfo();
                                        clearPlayerList();
                                        document.querySelector(`#partyPanel`).classList.remove('hidden');
-                                       console.log(`clicked button to add player ${Name}`);
-                                       console.log(`the card is ${event.target.id}`);
-                                       
-                                       if(event.target.querySelector('playerCard') != null){
-                                           debugger;
-                                        event.target.querySelector('playerCard').remove();
-                                       }
 
-                                       event.target.className = 'playerCard';
+                                       const playerCardDiv = document.createElement('div');
+                                       playerCardDiv.className = `playerCard`;
 
-                                       event.target.appendChild(playerPortrait);
-                                       event.target.appendChild(playerName);
-                                       event.target.appendChild(playerJob);
-                                       event.target.appendChild(playerJobLevel);
+                                       playerCardDiv.appendChild(playerPortrait);
+                                       playerCardDiv.appendChild(playerName);
+                                       playerCardDiv.appendChild(playerJob);
+                                       playerCardDiv.appendChild(playerJobLevel);
+
+                                       event.target.appendChild(playerCardDiv);
 
                                        document.querySelector(`#searchName`).value = '';
                                        searchForm.className = `hidden`;
                                        
+                                       event.target.querySelector('button').classList.remove('hidden');
+                                       event.target.querySelector('button').addEventListener('click',removePartyMember);
+
                                        event.target.removeEventListener('click',clickOnCard);
                                    })
                                 })
@@ -139,6 +137,9 @@ function clickOnCard(event){
     })
 }
 
+function removePartyMember(event){
+    event.target.className = 'hidden';
+}
 
 function clearPlayerInfo() {
     if (document.querySelector('#playerInfo') != null) {
