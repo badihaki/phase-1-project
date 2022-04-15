@@ -62,3 +62,6 @@ Bugs:
 - The search feature doesn't find the right name
 - 'playerList' returns too many players
     - perhaps slice isn't the right method?
+- if there's no character name, the script just shuts down
+- every time you search, it does an additional search, but why??
+- Sometimes the player is added to the wrong card

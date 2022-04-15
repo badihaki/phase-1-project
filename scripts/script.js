@@ -25,9 +25,7 @@ function clickOnCard(event){
         const nameToSearch = document.querySelector(`#searchName`).value.replaceAll(` `,`&`);
         if(server != `default`){
             // clear old list data
-            for(const listItem of document.querySelectorAll(`.playerLI`)){
-                listItem.remove();
-            }
+            clearPlayerList();
             console.log(`name to search: ${nameToSearch} // server to search in: ${server}`);
             // remove the server warning if it exists
             if(document.querySelector(`#noServerWarning`) != null){
@@ -46,15 +44,15 @@ function clickOnCard(event){
                         // debugger;
                         console.log(playerList);
                         for (const player of playerList) {
-                            const {Avatar, Lang, Name, Rank} = player;
+                            const {Avatar, Name} = player;
                             //debugger;
                             const li = document.createElement(`li`);
                             li.className = 'playerLI';
                             li.id = player[`ID`];
 
                             li.innerHTML = `
-                            <img src=${player['Avatar']}>
-                            <h3>${player[`Name`]}</h3>
+                            <img src=${Avatar}>
+                            <h3>${Name}</h3>
                             `
                             li.addEventListener('click',(listEvent)=>{
                                 // I need to show the player information in #resultsDetails div
@@ -92,9 +90,7 @@ function clickOnCard(event){
 
                                    const searchResults = document.createElement(`div`);
                                    searchResults.id = `playerInfo`
-                                   if(document.querySelector('#playerInfo') != null){
-                                       document.querySelector('#playerInfo').remove();
-                                   }
+                                   clearPlayerInfo();
                                    document.querySelector('#resultsDetails').appendChild(searchResults);
 
                                    searchResults.appendChild(playerName);
@@ -103,6 +99,30 @@ function clickOnCard(event){
                                    searchResults.appendChild(playerJobLevel);
                                    searchResults.appendChild(addPlayerBtn);
 
+                                   addPlayerBtn.addEventListener(`click`,()=>{
+                                       clearPlayerInfo();
+                                       clearPlayerList();
+                                       document.querySelector(`#partyPanel`).classList.remove('hidden');
+                                       console.log(`clicked button to add player ${Name}`);
+                                       console.log(`the card is ${event.target.id}`);
+                                       
+                                       if(event.target.querySelector('playerCard') != null){
+                                           debugger;
+                                        event.target.querySelector('playerCard').remove();
+                                       }
+
+                                       event.target.className = 'playerCard';
+
+                                       event.target.appendChild(playerPortrait);
+                                       event.target.appendChild(playerName);
+                                       event.target.appendChild(playerJob);
+                                       event.target.appendChild(playerJobLevel);
+
+                                       document.querySelector(`#searchName`).value = '';
+                                       searchForm.className = `hidden`;
+                                       
+                                       event.target.removeEventListener('click',clickOnCard);
+                                   })
                                 })
                             })
                             document.querySelector('#searchResults').appendChild(li);
@@ -117,4 +137,19 @@ function clickOnCard(event){
             document.querySelector('#characterPanel').appendChild(serverWarning);
         }
     })
+}
+
+
+function clearPlayerInfo() {
+    if (document.querySelector('#playerInfo') != null) {
+        document.querySelector('#playerInfo').remove();
+    }
+}
+
+function clearPlayerList() {
+    if(document.querySelector('.playerLI') != null){
+        for (const listItem of document.querySelectorAll(`.playerLI`)) {
+            listItem.remove();
+        }
+    }
 }
