@@ -22,57 +22,7 @@ function searchForPlayer(searchEvent){
                 document.querySelector(`#noServerWarning`).remove();
             }
             // build out the functionality with the API
-            fetch(`https://xivapi.com/character/search?name=${nameToSearch}&server=${server}`)
-                .then(resp=>{
-                    document.querySelector(`#searchButton`).disabled = true;
-                    return resp.json()
-                })
-                    .then(data=>{
-                        // console.log(data['Results']);
-                        const playerList = data['Results'].slice(4);
-                        // debugger;
-                        console.log(playerList);
-                        for (const player of playerList) {
-                            const {Avatar, Name} = player;
-                            //debugger;
-                            const li = document.createElement(`li`);
-                            li.className = 'playerLI';
-                            li.id = player[`ID`];
-
-                            li.innerHTML = `
-                            <img src=${Avatar}>
-                            <h3>${Name}</h3>
-                            `
-                            li.addEventListener('click',(listEvent)=>{
-                                // I need to show the player information in #resultsDetails div
-                                fetch(`https://xivapi.com/character/${listEvent.target.parentNode.id}`).then(callForResp=>callForResp.json()).then(playerData=>{
-                                    console.log(playerData);
-                                    const {Name, ActiveClassJob,Portrait} = playerData[`Character`];
-                                    const playerName = document.createElement('h2');
-                                    playerName.innerText = Name;
-                                    const playerPortrait = document.createElement('img');
-                                    playerPortrait.src = Portrait;
-                                    const playerJob = document.createElement('h3');
-                                    playerJob.innerText = ActiveClassJob[`UnlockedState`][`Name`];
-                                    const playerJobLevel = document.createElement(`h4`);
-                                    playerJobLevel.innerText =  ActiveClassJob[`Level`];
-
-                                   const searchResults = document.createElement(`div`);
-                                   searchResults.id = `playerInfo`
-                                   clearPlayerInfo();
-                                   document.querySelector('#resultsDetails').appendChild(searchResults);
-
-                                   searchResults.appendChild(playerName);
-                                   searchResults.appendChild(playerPortrait);
-                                   searchResults.appendChild(playerJob);
-                                   searchResults.appendChild(playerJobLevel);
-
-                                })
-                            })
-                            document.querySelector('#searchResults').appendChild(li);
-                        }
-                        document.querySelector(`#searchButton`).disabled = false;
-                    })
+            buildPlayerList(nameToSearch);
         }
         else{
             const serverWarning = document.createElement(`p`);
@@ -83,6 +33,61 @@ function searchForPlayer(searchEvent){
             }
         }
 }
+
+function buildPlayerList(nameToSearch) {
+    fetch(`https://xivapi.com/character/search?name=${nameToSearch}&server=${server}`)
+        .then(resp => {
+            document.querySelector(`#searchButton`).disabled = true;
+            return resp.json();
+        })
+        .then(data => {
+            // console.log(data['Results']);
+            const playerList = data['Results'].slice(4);
+            // debugger;
+            console.log(playerList);
+            for (const player of playerList) {
+                const { Avatar, Name } = player;
+                //debugger;
+                const li = document.createElement(`li`);
+                li.className = 'playerLI';
+                li.id = player[`ID`];
+
+                li.innerHTML = `
+                            <img src=${Avatar}>
+                            <h3>${Name}</h3>
+                            `;
+                li.addEventListener('click', buildCharacterInfo);
+                document.querySelector('#searchResults').appendChild(li);
+            }
+            document.querySelector(`#searchButton`).disabled = false;
+        });
+}
+
+function buildCharacterInfo(listEvent){
+    fetch(`https://xivapi.com/character/${listEvent.target.parentNode.id}`).then(callForResp => callForResp.json()).then(playerData => {
+                        console.log(playerData);
+                        const { Name, ActiveClassJob, Portrait } = playerData[`Character`];
+                        const playerName = document.createElement('h2');
+                        playerName.innerText = Name;
+                        const playerPortrait = document.createElement('img');
+                        playerPortrait.src = Portrait;
+                        const playerJob = document.createElement('h3');
+                        playerJob.innerText = ActiveClassJob[`UnlockedState`][`Name`];
+                        const playerJobLevel = document.createElement(`h4`);
+                        playerJobLevel.innerText = ActiveClassJob[`Level`];
+
+                        const searchResults = document.createElement(`div`);
+                        searchResults.id = `playerInfo`;
+                        clearPlayerInfo();
+                        document.querySelector('#resultsDetails').appendChild(searchResults);
+
+                        searchResults.appendChild(playerName);
+                        searchResults.appendChild(playerPortrait);
+                        searchResults.appendChild(playerJob);
+                        searchResults.appendChild(playerJobLevel);
+
+                    });
+                }
 
 function clickOnCard(event){
     const card = event.target;
