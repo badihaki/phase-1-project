@@ -12,6 +12,7 @@ function init(event){
 
 function searchForPlayer(searchEvent){
     searchEvent.preventDefault();
+    clearPlayerInfo();
     const nameToSearch = document.querySelector(`#searchName`).value.replaceAll(` `,`&`);
         if(server != `default` && nameToSearch != ''){
             // clear old list data
@@ -41,9 +42,7 @@ function buildPlayerList(nameToSearch) {
             return resp.json();
         })
         .then(data => {
-            // console.log(data['Results']);
-            const playerList = data['Results'].slice(4);
-            // debugger;
+            const playerList = data['Results'];
             console.log(playerList);
             for (const player of playerList) {
                 const { Avatar, Name } = player;
@@ -74,7 +73,7 @@ function buildCharacterInfo(listEvent){
                         const playerJob = document.createElement('h3');
                         playerJob.innerText = ActiveClassJob[`UnlockedState`][`Name`];
                         const playerJobLevel = document.createElement(`h4`);
-                        playerJobLevel.innerText = ActiveClassJob[`Level`];
+                        playerJobLevel.innerText = `LVL${ActiveClassJob[`Level`]}`;
 
                         const searchResults = document.createElement(`div`);
                         searchResults.id = `playerInfo`;

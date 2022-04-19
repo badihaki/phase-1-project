@@ -22,6 +22,44 @@ body{
 #searchResults{
     position: absolute;
     left: 100px;
+    right: 1250px;
+    align-items: center;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#playerInfo{
+    position: absolute;
+    left: 850px;
+}
+#playerInfo > img{
+    width: 500px;
+}
+#playerInfo > h2{
+    font-size: 25px;
+    color: aliceblue;
+
+    position: absolute;
+    left: 385px;
+    top: -5px;
+}
+#playerInfo > h3{
+    font-size: 20px;
+    color: aliceblue;
+
+    position: absolute;
+    left: 375px;
+    top: 55px;
+}
+#playerInfo > h4{
+    font-size: 15px;
+    color: aliceblue;
+
+    position: absolute;
+    left: 430px;
+    top: 85px;
 }
 .hidden{
     visibility: hidden;
