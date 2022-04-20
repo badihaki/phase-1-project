@@ -17,14 +17,10 @@ Follow good coding practices. Keep your code DRY (Do not repeat yourself) by uti
 
 # Pitch
 ## Project Story
-My friends, family and I are all gamers. Recently, we’ve been playing a game called Final Fantasy XIV. I want to create a party manager that uses the public Final Fantasy XIV API to search for players and add them to an adventuring party for a session.
+My friends, family and I are all gamers. Recently, we’ve been playing a game called Final Fantasy XIV. I wanted to create a player search tool that uses the public Final Fantasy XIV API to look up lists of players and select a player from the list in order to view more detailed information.
 
 ## Core Features
-The project will utilize a search function to find players from a server and add them to a party list. The window will be separated into 2 areas, the party area and the character information area.
-
-The characters in the party will be represented by cards in the party area, and will at first be blank. Clicking on one of the cards will prompt a user with a search form, which will find players based on name and server.
-
-Searching for a player will produce a list of results. Clicking on an image or name from the list will show a full profile with the ability to add that player to the party. Upon adding the player to the party, their image will replace the blank image on the card. Clicking on that player’s card will again show their full profile, but in an extended view, with the ability to take them out of the party.
+Users will be able to search for a player by first or last name, the API doesn't differentiate when hitting the 'player search' endpoint. The app will show all matching players in the window. Selecting a player will show the user that player's name, current job, current job's level, and a full view of their character.
 
 ## API Data
 The public API data from https://xivapi.com will be my main source. Search requests will be sent to ‘https://xivapi.com/character/search?name=[name]&server=[server]’ while profile requests will be sent to ‘https://xivapi.com/character/[ID]’
